@@ -17,6 +17,8 @@ func main() {
 	b := builder.NewHtmlBuilder("ul")
 	b.AddChild("li", "hello")
 	b.AddChild("li", "world")
-	b.AddChildFluent("li", ", fluently").AddChildFluent("li", "and sufficient")
+	b.AddChildFluent("li", ", fluently").AddChildFluent("li", "and elegant")
 	fmt.Println(b.String())
+
+	pb := builder.NewPersonBuilder{}
 }
