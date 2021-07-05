@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/Lozovoi-Rodion/design_patterns/SOLID/LSP"
-	"github.com/Lozovoi-Rodion/design_patterns/SOLID/OCP"
-	"github.com/Lozovoi-Rodion/design_patterns/SOLID/SRP"
+	"github.com/Lozovoi-Rodion/GO_design_patterns/SOLID/LSP"
+	"github.com/Lozovoi-Rodion/GO_design_patterns/SOLID/OCP"
+	"github.com/Lozovoi-Rodion/GO_design_patterns/SOLID/SRP"
 )
 
 func main() {

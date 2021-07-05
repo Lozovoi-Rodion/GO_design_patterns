@@ -1,1 +1,2 @@
-# GO_design_patterns
+# Design Patterns built in GO
+

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/Lozovoi-Rodion/design_patterns/builder/examples"
+	"github.com/Lozovoi-Rodion/GO_design_patterns/builder/examples"
 	"strings"
 )
 
