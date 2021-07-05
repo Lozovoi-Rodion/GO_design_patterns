@@ -1,3 +1,4 @@
+// Package builder: simple classic builder example
 package builder
 
 import (

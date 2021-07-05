@@ -1,5 +1,6 @@
+// Package builder: builder facets example
+// Used for builder chunks deconstructing by providing different API for creating an object
 package builder
-
 
 type Person struct {
 	// address
@@ -13,6 +14,14 @@ type PersonBuilder struct {
 	person *Person
 }
 
+type PersonAddressBuilder struct {
+	PersonBuilder
+}
+
+type PersonJobBuilder struct {
+	PersonBuilder
+}
+
 func (b *PersonBuilder) Lives() *PersonAddressBuilder {
 	return &PersonAddressBuilder{*b}
 }
@@ -23,10 +32,6 @@ func (b *PersonBuilder) Works() *PersonJobBuilder {
 
 func NewPersonBuilder() *PersonBuilder {
 	return &PersonBuilder{&Person{}}
-}
-
-type PersonAddressBuilder struct {
-	PersonBuilder
 }
 
 func (pab *PersonAddressBuilder) At(streetAddress string) *PersonAddressBuilder {
@@ -42,10 +47,6 @@ func (pab *PersonAddressBuilder) In(city string) *PersonAddressBuilder {
 func (pab *PersonAddressBuilder) WithPostcode(postcode string) *PersonAddressBuilder {
 	pab.person.PostCode = postcode
 	return pab
-}
-
-type PersonJobBuilder struct {
-	PersonBuilder
 }
 
 func (pjb *PersonJobBuilder) At(
