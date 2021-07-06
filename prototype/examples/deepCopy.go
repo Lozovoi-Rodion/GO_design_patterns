@@ -1,6 +1,10 @@
 package prototype
 
-import "fmt"
+import (
+	"bytes"
+	"encoding/gob"
+	"fmt"
+)
 
 type Address struct {
 	StreetAddress, City, Country string
@@ -21,6 +25,20 @@ func (p *Person) DeepCopy() *Person {
 	q.Address = p.Address.DeepCopy()
 	copy(q.Friends, p.Friends)
 	return &q
+}
+
+// DeepSerializedCopy : Copying through serialization
+func (p *Person) DeepSerializedCopy() *Person {
+	result := Person{}
+	b := bytes.Buffer{}
+
+	e := gob.NewEncoder(&b)
+	_ = e.Encode(p)
+
+	d := gob.NewDecoder(&b)
+	_ = d.Decode(&result)
+
+	return &result
 }
 
 // DeepCopyExample can not be scaled
