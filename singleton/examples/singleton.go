@@ -3,10 +3,13 @@ package singleton
 import (
 	"bufio"
 	"os"
-	"path/filepath"
 	"strconv"
 	"sync"
 )
+
+type Database interface {
+	GetPopulation(name string) int
+}
 
 type singletonDatabase struct {
 	cities map[string]int
@@ -22,7 +25,7 @@ var instance *singletonDatabase
 func GetSingletonDatabase() *singletonDatabase {
 	once.Do(func() {
 		db := singletonDatabase{}
-		cities, err := readData("./cities.txt")
+		cities, err := readData("./examples/cities.txt")
 		if err != nil {
 			panic(err)
 		}
@@ -34,18 +37,11 @@ func GetSingletonDatabase() *singletonDatabase {
 }
 
 func readData(path string) (map[string]int, error) {
-	ex, err := os.Executable()
-	if err != nil {
-		return nil, err
-	}
-	exPath := filepath.Dir(ex)
-
-	file, err := os.Open(exPath + path)
+	file, err := os.Open(path)
 
 	if err != nil {
 		return nil, err
 	}
-	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
@@ -58,5 +54,40 @@ func readData(path string) (map[string]int, error) {
 		v, _ := strconv.Atoi(scanner.Text())
 		result[k] = v
 	}
+
 	return result, nil
+}
+
+// Problems with singletons: it breaks Dependency inversion principle
+// as we don't rely on certain interface but on its implementation
+
+func GetTotalPopulation(cities []string) int {
+	result := 0
+	for _, city := range cities {
+		result += GetSingletonDatabase().GetPopulation(city)
+	}
+	return result
+}
+
+func GetTotalPopulationEx(db Database, cities []string) int {
+	result := 0
+	for _, city := range cities {
+		result += db.GetPopulation(city)
+	}
+	return result
+}
+
+type DummyDatabase struct {
+	dummyData map[string]int
+}
+
+func (d *DummyDatabase) GetPopulation(name string) int {
+	if len(d.dummyData) == 0 {
+		d.dummyData = map[string]int{
+			"alpha": 1,
+			"beta":  2,
+			"gamma": 3,
+		}
+	}
+	return d.dummyData[name]
 }
