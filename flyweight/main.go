@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/Lozovoi-Rodion/GO_design_patterns/flyweight/examples"
 )
 
 // Motivation : avoid redundancy when storing data
