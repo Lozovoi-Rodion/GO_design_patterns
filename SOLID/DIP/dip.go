@@ -25,6 +25,11 @@ type RelationshipBrowser interface {
 	FindAllChildrenOf(name string) []*Person
 }
 
+// Low-level module
+type Relationships struct {
+	relations []Info
+}
+
 func (r *Relationships) FindAllChildrenOf(name string) []*Person {
 	result := make([]*Person, 0)
 
@@ -37,10 +42,6 @@ func (r *Relationships) FindAllChildrenOf(name string) []*Person {
 	return result
 }
 
-// Low-level module
-type Relationships struct {
-	relations []Info
-}
 
 func (r *Relationships) AddParentAndChild(parent, child *Person) {
 	r.relations = append(r.relations, Info{

@@ -12,6 +12,10 @@ type EmailBuilder struct {
 	email email
 }
 
+func NewEmailBuilder() *EmailBuilder {
+	return &EmailBuilder{email{}}
+}
+
 func (eb *EmailBuilder) From(from string) *EmailBuilder {
 	if !strings.Contains(from, "@") {
 		panic("email should contain @")
@@ -20,19 +24,23 @@ func (eb *EmailBuilder) From(from string) *EmailBuilder {
 	return eb
 }
 
-func (b *EmailBuilder) To(to string) *EmailBuilder {
-	b.email.to = to
-	return b
+func (eb *EmailBuilder) To(to string) *EmailBuilder {
+	eb.email.to = to
+	return eb
 }
 
-func (b *EmailBuilder) Subject(subject string) *EmailBuilder {
-	b.email.subject = subject
-	return b
+func (eb *EmailBuilder) Subject(subject string) *EmailBuilder {
+	eb.email.subject = subject
+	return eb
 }
 
-func (b *EmailBuilder) Body(body string) *EmailBuilder {
-	b.email.body = body
-	return b
+func (eb *EmailBuilder) Body(body string) *EmailBuilder {
+	eb.email.body = body
+	return eb
+}
+
+func (eb *EmailBuilder) Build() *email {
+	return &eb.email
 }
 
 func sendMailImpl(email *email) {

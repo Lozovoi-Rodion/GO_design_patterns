@@ -19,8 +19,13 @@ const (
 	Large
 )
 
-type Filter struct {
+type Product struct {
+	Name  string
+	Color Color
+	Size  Size
 }
+
+type Filter struct {}
 
 func (f *Filter) FilterByColor(products []Product, color Color) []*Product {
 	result := make([]*Product, 0)
@@ -89,10 +94,4 @@ func (f *BetterFilter) Filter(products []Product, spec Specification) []*Product
 		}
 	}
 	return result
-}
-
-type Product struct {
-	Name  string
-	Color Color
-	Size  Size
 }

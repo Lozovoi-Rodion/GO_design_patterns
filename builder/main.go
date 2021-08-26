@@ -39,6 +39,16 @@ func main() {
 			Body("Hello, do you want to meet?")
 	})
 
+	emailBd := builder.NewEmailBuilder().
+		From("foo@bar.com").
+		To("bar@baz.com").
+		Subject("Meeting").
+		Body("Hello, do you want to meet?")
+	email := emailBd.Build()
+	fmt.Println("|||||||||")
+	fmt.Println(email)
+	fmt.Println("|||||||||")
+
 	pfb := builder.PersonFpBuilder{}
 	pf := pfb.Called("Rodya").WorksAsA("dev").Build()
 	fmt.Println(*pf)

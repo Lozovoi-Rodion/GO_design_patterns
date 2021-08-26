@@ -15,4 +15,12 @@ func main()  {
 	a := adapter.VectorToRaster(rc)
 	_ = adapter.VectorToRaster(rc)
 	fmt.Println(adapter.DrawPoints(a))
+
+	client := &adapter.Client{}
+	mac := &adapter.Mac{}
+	client.InsertLightningIntoComputer(mac)
+
+	win := &adapter.Windows{}
+	winAdapter := &adapter.WindowsAdapter{win}
+	client.InsertLightningIntoComputer(winAdapter)
 }

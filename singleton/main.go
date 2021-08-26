@@ -9,7 +9,7 @@ import (
 // - lazy one-time initialization using sync.Once
 // - Adhere to DIP: depend on interfaces, not concrete types
 
-func main()  {
+func main() {
 	db := singleton.GetSingletonDatabase()
 	pop := db.GetPopulation("Mumbai")
 	fmt.Println("population of Mumbai is ", pop)
