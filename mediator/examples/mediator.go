@@ -13,7 +13,7 @@ func NewPerson(name string) *Person {
 }
 
 func (p *Person) Receive(sender, message string) {
-	s := fmt.Sprintf("%s: %s", sender, message)
+	s := fmt.Sprintf("%s: %s \n", sender, message)
 	fmt.Printf("[%s's chat session]: %s", p.Name, s)
 	p.chatLog = append(p.chatLog, s)
 }
