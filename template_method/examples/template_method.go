@@ -42,3 +42,12 @@ func (c *chess) WinningPlayer() int {
 func NewGameOfChess() Game {
 	return &chess{1, 10, 0}
 }
+
+// PlayGameFn : all functions can be implemented outside the scope and used in template method.
+func PlayGameFn(start, takeTurn func(), haveWinner func() bool, winningPlayer func() int) {
+	start()
+	for !haveWinner() {
+		takeTurn()
+	}
+	fmt.Printf("Player %d wins. \n", winningPlayer())
+}
